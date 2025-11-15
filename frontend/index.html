@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marvel Look-Alike Finder</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="particle-effects"></div>
+
+    <header>
+        <h1 class="main-tagline">WHICH MARVEL HERO DO YOU LOOK LIKE?</h1>
+    </header>
+
+    <main>
+        <div class="character-holograms">
+            <!-- Character panels will be dynamically inserted here by script.js -->
+            <!-- Static placeholders for styling -->
+            <div class="hologram-panel iron-man"></div>
+            <div class="hologram-panel captain-marvel"></div>
+            <div class="hologram-panel thor"></div>
+            <div class="hologram-panel doctor-strange"></div>
+            <div class="hologram-panel black-widow"></div>
+            <div class="hologram-panel loki"></div>
+        </div>
+
+        <section id="upload-section" class="upload-section">
+            <div class="arc-reactor-container">
+                <div class="arc-reactor-frame">
+                    <div class="arc-reactor-core"></div>
+                </div>
+                <input type="file" id="photo-upload-input" accept="image/jpeg, image/png" hidden>
+                <button id="photo-upload-button" class="photo-upload-button">
+                    <span>UPLOAD PHOTO</span>
+                </button>
+            </div>
+        </section>
+
+        <section id="result-section" class="result-section hidden">
+            <div class="glassmorphism-card">
+                <img id="result-image" src="" alt="Matched Character">
+                <h2 id="result-name"></h2>
+                <p>Similarity Score: <span id="result-score"></span></p>
+                <p class="meme-text" id="result-meme"></p>
+                <button id="try-again-button">TRY AGAIN</button>
+            </div>
+        </section>
+
+        <div id="loading-spinner" class="loading-spinner hidden"></div>
+        <div id="error-message" class="error-message hidden"></div>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

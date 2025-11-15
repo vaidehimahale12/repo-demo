@@ -3,6 +3,7 @@
 
 import uvicorn
 from fastapi import FastAPI
+from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 from routes import character_routes, upload_routes
 
@@ -25,23 +26,27 @@ app = FastAPI(
 # --------------------------------------------------------------------------
 # Set up CORS (Cross-Origin Resource Sharing) to allow the frontend
 # to communicate with this backend.
-# For development, we allow all origins ("*"). In a production environment,
-# this should be restricted to the specific frontend domain.
 origins = ["*"]
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
     allow_credentials=True,
-    allow_methods=["*"],  # Allows all standard HTTP methods (GET, POST, etc.)
-    allow_headers=["*"],  # Allows all headers
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
+
+# --------------------------------------------------------------------------
+# Static Files Configuration
+# --------------------------------------------------------------------------
+# Mount the 'frontend' directory to serve static files like HTML, CSS, and JS.
+app.mount("/frontend", StaticFiles(directory="frontend"), name="frontend")
+
 
 # --------------------------------------------------------------------------
 # API Routers
 # --------------------------------------------------------------------------
 # Include the routers for different parts of the API.
-# This keeps the code modular and organized.
 app.include_router(upload_routes.router, prefix="/api", tags=["Face Recognition"])
 app.include_router(character_routes.router, prefix="/api", tags=["Characters"])
 
@@ -65,9 +70,5 @@ async def health_check():
 # --------------------------------------------------------------------------
 # Application Startup
 # --------------------------------------------------------------------------
-# The entry point for running the application.
-# `uvicorn.run()` starts the server. This block is executed when the script
-# is run directly (e.g., `python main.py`).
-# For production, it's recommended to use a process manager like Gunicorn.
 if __name__ == "__main__":
-    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
+    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=False)

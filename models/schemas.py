@@ -22,7 +22,7 @@ class CharacterMatch(BaseModel):
 
     class Config:
         # Provides example data for API documentation.
-        schema_extra = {
+        json_schema_extra = {
             "example": {
                 "character_name": "Thor",
                 "similarity_score": 0.92,
@@ -40,7 +40,7 @@ class CharacterInfo(BaseModel):
     image_url: str = Field(..., example="https://path/to/iron_man.jpg", description="A URL to the character's image.")
 
     class Config:
-        schema_extra = {
+        json_schema_extra = {
             "example": {
                 "name": "Black Widow",
                 "image_url": "https://example.com/images/black_widow.jpg"

@@ -1,0 +1,328 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+
+:root {
+    --deep-navy: #0a0e1a;
+    --cosmic-purple: #1a182c;
+    --vibranium-blue: #00eaff;
+    --golden-highlights: #ffc107;
+    --neon-red: #ff3d53;
+    --text-color: #e0e0e0;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--deep-navy);
+    color: var(--text-color);
+    font-family: 'Orbitron', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    overflow: hidden;
+    position: relative;
+    text-align: center;
+}
+
+/* --- Background Effects --- */
+.particle-effects {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(circle at 20% 20%, rgba(10, 14, 26, 0), var(--deep-navy) 70%),
+                      radial-gradient(circle at 80% 60%, rgba(26, 24, 44, 0.8), var(--deep-navy) 80%);
+    z-index: -1;
+}
+
+.particle-effects::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 200%;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800"><circle fill="%23fff" cx="100" cy="100" r="1.5"/><circle fill="%23fff" cx="300" cy="400" r="1"/><circle fill="%23fff" cx="600" cy="200" r="1.2"/><circle fill="%23fff" cx="750" cy="550" r="0.8"/><circle fill="%23fff" cx="450" cy="700" r="1.1"/></svg>');
+    background-repeat: repeat;
+    background-size: 800px 800px;
+    opacity: 0.3;
+    animation: move-particles 120s linear infinite;
+}
+
+@keyframes move-particles {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(-800px, -800px); }
+}
+
+/* --- Header & Tagline --- */
+header {
+    margin: 2rem 0;
+}
+
+.main-tagline {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    text-shadow: 0 0 10px var(--vibranium-blue), 0 0 20px var(--vibranium-blue), 0 0 40px var(--vibranium-blue);
+    animation: flicker 3s infinite alternate;
+}
+
+@keyframes flicker {
+    0%, 18%, 22%, 25%, 53%, 57%, 100% {
+        text-shadow:
+        0 0 4px #fff,
+        0 0 11px var(--vibranium-blue),
+        0 0 19px var(--vibranium-blue),
+        0 0 40px var(--vibranium-blue),
+        0 0 80px var(--vibranium-blue);
+    }
+    20%, 24%, 55% {
+        text-shadow: none;
+    }
+}
+
+/* --- Character Holograms --- */
+.character-holograms {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120%;
+    perspective: 1000px;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.hologram-panel {
+    width: 100px;
+    height: 100px;
+    background-size: cover;
+    background-position: center;
+    border: 2px solid var(--vibranium-blue);
+    box-shadow: 0 0 15px var(--vibranium-blue), inset 0 0 15px var(--vibranium-blue);
+    border-radius: 50%;
+    filter: blur(1.5px) grayscale(40%);
+    opacity: 0.5;
+    animation: float 6s ease-in-out infinite;
+    transition: all 0.3s ease;
+}
+
+.hologram-panel:nth-child(1) { animation-delay: 0s; transform: translateZ(-50px) translateY(-50px); }
+.hologram-panel:nth-child(2) { animation-delay: 1s; transform: rotateY(30deg) translateZ(-100px) translateY(40px); }
+.hologram-panel:nth-child(3) { animation-delay: 2s; transform: rotateY(-30deg) translateZ(-100px) translateY(-20px);}
+.hologram-panel:nth-child(4) { animation-delay: 3s; transform: rotateY(60deg) translateZ(-200px) translateY(60px); }
+.hologram-panel:nth-child(5) { animation-delay: 4s; transform: rotateY(-60deg) translateZ(-200px) translateY(-40px);}
+.hologram-panel:nth-child(6) { animation-delay: 5s; transform: translateZ(-50px) translateY(50px); }
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+}
+
+
+/* --- Arc Reactor Upload Section --- */
+.upload-section {
+    position: relative;
+    z-index: 10;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.arc-reactor-container {
+    position: relative;
+    width: 250px;
+    height: 250px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.arc-reactor-frame {
+    width: 100%;
+    height: 100%;
+    border: 5px solid #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 15px 5px #fff, 0 0 30px 10px var(--vibranium-blue), inset 0 0 20px 0 var(--vibranium-blue);
+    animation: rotate-reactor 20s linear infinite;
+}
+
+.arc-reactor-core {
+    position: absolute;
+    width: 50%;
+    height: 50%;
+    background: var(--vibranium-blue);
+    border-radius: 50%;
+    box-shadow: 0 0 20px 10px var(--vibranium-blue), 0 0 40px 20px #fff;
+    animation: pulse-core 2s ease-in-out infinite;
+}
+
+@keyframes rotate-reactor {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes pulse-core {
+    0%, 100% { transform: scale(0.95); box-shadow: 0 0 20px 10px var(--vibranium-blue), 0 0 40px 20px #fff; }
+    50% { transform: scale(1.05); box-shadow: 0 0 30px 15px var(--vibranium-blue), 0 0 60px 30px #fff; }
+}
+
+.photo-upload-button {
+    position: absolute;
+    background: transparent;
+    border: 2px solid #fff;
+    color: #fff;
+    padding: 15px 30px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    box-shadow: 0 0 10px 0 var(--vibranium-blue), inset 0 0 10px 0 var(--vibranium-blue);
+    transition: all 0.3s ease;
+}
+
+.photo-upload-button:hover {
+    background: var(--vibranium-blue);
+    color: var(--deep-navy);
+    box-shadow: 0 0 20px 10px var(--vibranium-blue);
+}
+
+/* --- Result Section --- */
+.result-section {
+    position: relative;
+    z-index: 10;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.glassmorphism-card {
+    background: rgba(10, 14, 26, 0.6);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 234, 255, 0.5);
+    border-radius: 15px;
+    padding: 2rem;
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    box-shadow: 0 8px 32px 0 rgba(0, 234, 255, 0.2);
+}
+
+.glassmorphism-card #result-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 3px solid var(--golden-highlights);
+    box-shadow: 0 0 15px var(--golden-highlights);
+}
+
+.glassmorphism-card h2 {
+    font-size: 2rem;
+    color: var(--golden-highlights);
+    text-shadow: 0 0 5px var(--golden-highlights);
+}
+
+.glassmorphism-card p {
+    font-size: 1.1rem;
+}
+
+.glassmorphism-card .meme-text {
+    font-style: italic;
+    color: var(--vibranium-blue);
+}
+
+#try-again-button {
+    margin-top: 1rem;
+    padding: 10px 20px;
+    background-color: var(--golden-highlights);
+    color: var(--deep-navy);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1rem;
+    text-transform: uppercase;
+    transition: transform 0.2s ease;
+}
+
+#try-again-button:hover {
+    transform: scale(1.05);
+}
+
+/* --- UI State Helpers --- */
+.hidden {
+    display: none !important;
+    opacity: 0 !important;
+}
+
+.loading-spinner {
+    width: 60px;
+    height: 60px;
+    border: 5px solid rgba(0, 234, 255, 0.3);
+    border-top-color: var(--vibranium-blue);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    position: absolute;
+    z-index: 20;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.error-message {
+    color: var(--neon-red);
+    background: rgba(255, 61, 83, 0.1);
+    border: 1px solid var(--neon-red);
+    padding: 1rem;
+    border-radius: 5px;
+    text-shadow: 0 0 5px var(--neon-red);
+    z-index: 20;
+    position: absolute;
+}
+
+
+/* --- Responsive Design --- */
+@media (max-width: 768px) {
+    .main-tagline {
+        font-size: 1.8rem;
+    }
+
+    .character-holograms {
+        flex-wrap: wrap;
+        width: 100%;
+        gap: 10px;
+        position: relative;
+        top: auto;
+        left: auto;
+        transform: none;
+        margin-bottom: 2rem;
+    }
+
+    .hologram-panel {
+        width: 60px;
+        height: 60px;
+        opacity: 0.3;
+        animation: none;
+        transform: none !important;
+    }
+
+    .arc-reactor-container {
+        width: 200px;
+        height: 200px;
+    }
+
+    .glassmorphism-card {
+        width: 90%;
+    }
+}
